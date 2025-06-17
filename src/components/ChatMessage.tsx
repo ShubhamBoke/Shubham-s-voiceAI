@@ -1,11 +1,11 @@
 
 "use client";
 
-import React from 'react';
-import { Card, CardContent } from '@/components/ui/card';
+import React, { useRef, useImperativeHandle } from 'react';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { User, Bot } from 'lucide-react';
-import AudioPlayer from './AudioPlayer';
+import AudioPlayer from '@/components/AudioPlayer';
 import { cn } from '@/lib/utils';
 import type { Message } from '@/app/page'; // Assuming Message type is exported from page.tsx
 
@@ -13,8 +13,25 @@ interface ChatMessageProps {
   message: Message;
 }
 
-const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
+export interface ChatMessageRef {
+  stopAudio: () => void;
+}
+
+const ChatMessage = React.forwardRef<ChatMessageRef, ChatMessageProps>(({ message }, ref) => {
+  const audioRef = useRef<HTMLAudioElement>(null);
+
   const isUser = message.type === 'user';
+  const showProcessingIndicator = isUser && message.status === 'processing';
+
+  useImperativeHandle(ref, () => ({
+    stopAudio: () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        // Optionally reset playback time to beginning
+        audioRef.current.currentTime = 0;
+      }
+    },
+  }));
 
   return (
     <div className={cn("flex items-end gap-2 my-4", isUser ? "justify-end" : "justify-start")}>
@@ -50,6 +67,6 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
       )}
     </div>
   );
-};
+});
 
 export default ChatMessage;
