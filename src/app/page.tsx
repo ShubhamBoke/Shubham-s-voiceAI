@@ -72,7 +72,10 @@ export default function VoiceFlowPage() {
       stopAllAudio(); // Stop any currently playing audio after successful transcription
       // 2. AI Agent Chat Completion
  aiMessageId = addMessage({ type: 'ai', text: "Thinking...", status: 'processing' });
-      const aiCompletionResult = await aiAgentChatCompletion({ transcribedText: userText });
+      const aiCompletionResult = await aiAgentChatCompletion({
+        transcribedText: userText,
+        history: messages.map(msg => ({ type: msg.type, text: msg.text })), // Pass formatted history
+      });
       aiText = aiCompletionResult.agentResponse;
 
       // Final AI message update after both text and audio are ready
