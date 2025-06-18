@@ -57,7 +57,7 @@ export default function VoiceFlowPage() {
   
   const handleAudioRecorded = async (audioDataUri: string) => {
     setIsProcessing(true); // Set processing to true at the very beginning    
-    const userMessageId = addMessage({ type: 'user', text: "Processing... asdasdas", status: 'processing' }); // Initial user message
+    const userMessageId = addMessage({ type: 'user', text: "Processing...", status: 'processing' }); // Initial user message
     let aiMessageId: string | undefined;
     let aiText: string | undefined; // Declare aiText here so it's available in finally
     try {
@@ -128,14 +128,22 @@ export default function VoiceFlowPage() {
 
   return (
     <div className="flex flex-col h-screen bg-background text-foreground">
-      <header className="p-4 border-b border-border flex justify-between items-center shadow-sm bg-card sticky top-0 z-10">
-        <h1 className="text-2xl font-headline font-semibold tracking-tight">
-          VoiceFlow <span className="text-accent">AI</span>
+ <header className="p-4 border-b border-border flex justify-between items-center shadow-sm bg-card sticky top-0 z-10">
+        <h1 className="text-2xl font-headline font-semibold tracking-tight mb-4">
+ Shubham&apos;s <span className="text-accent">voiceAI</span>
         </h1>
         <ConfigurationPanel />
       </header>
 
+
       <main ref={mainRef} className="flex-1 overflow-y-auto relative">
+        <div className="p-4 bg-secondary text-secondary-foreground text-center mx-auto max-w-2xl rounded-md my-4">
+ <ol className="list-decimal list-inside text-left mx-auto max-w-md text-gray-600">
+            <li>First, click the microphone button.</li>
+            <li>Then, speak your message.</li>
+            <li>Finally, click the stop button to submit.</li>
+          </ol>
+        </div>
         {messages.map((message) => (
            <ChatMessage
             key={message.id}

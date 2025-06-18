@@ -34,7 +34,7 @@ const ChatMessage = React.forwardRef<ChatMessageRef, ChatMessageProps>(({ messag
   }));
 
   return (
-    <div className={cn("flex items-end gap-2 my-4", isUser ? "justify-end" : "justify-start")}>
+    <div className={cn("flex items-end gap-2 my-4 px-4", isUser ? "justify-end" : "justify-start")}>
       {!isUser && (
         <Avatar className="h-8 w-8 self-start shadow-sm">
           <AvatarFallback className="bg-accent text-accent-foreground">

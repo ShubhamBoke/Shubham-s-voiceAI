@@ -95,7 +95,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
         disabled={disabled || isInitializing}
         className="w-full max-w-xs text-lg py-6 rounded-xl shadow-lg bg-accent text-accent-foreground hover:bg-accent/90 active:scale-95 transition-all duration-150 transform focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2"
         aria-live="polite"
-        aria-label={isParentRecording ? "Stop Recording" : "Start Recording"}
+        aria-label={isParentRecording ? "Stop Recording" : "Speak"}
       >
         {isLoading ? (
           <Loader2 className="w-8 h-8 mr-2 animate-spin" />
@@ -104,7 +104,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
         ) : (
           <Mic className="w-8 h-8 mr-2" />
         )}
-        {isLoading ? "Initializing..." : isParentRecording ? "Stop Recording" : "Start Recording"}
+        {isLoading ? "Initializing..." : isParentRecording ? "Stop Recording" : "Speak"}
       </Button>
       {isParentRecording && <p className="text-sm text-muted-foreground animate-pulse-opacity">Recording in progress...</p>}
     </div>

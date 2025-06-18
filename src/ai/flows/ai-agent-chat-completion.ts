@@ -10,6 +10,9 @@
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
+import { readFileSync } from 'fs';
+import path from 'path';
+
 const AiAgentChatCompletionInputSchema = z.object({
   transcribedText: z.string().describe('The current transcribed text from the user.'),
   history: z.array(z.object({
@@ -30,19 +33,25 @@ export async function aiAgentChatCompletion(input: AiAgentChatCompletionInput): 
   return aiAgentChatCompletionFlow(input);
 }
 
+// Define the path to the instructions file
+const instructionsFilePath = 'src/ai/flows/agent_instructions.txt';
+
+// Read the instructions from the file
+const agentInstructionsTemplate = readFileSync(instructionsFilePath, 'utf-8');
+
 const prompt = ai.definePrompt({
   name: 'aiAgentChatCompletionPrompt',
   input: {schema: AiAgentChatCompletionInputSchema},
   output: {schema: AiAgentChatCompletionOutputSchema},
-  prompt: `You are an AI agent that provides helpful, detailed, and informed answers to user questions. You are given the conversation history to help you understand the context.
+  prompt: async (input: AiAgentChatCompletionInput) => {
+    const conversationHistory = input.history.map(msg => `${msg.type}: ${msg.text}`).join('\n');
 
-  Conversation History:
-  {{#each history}}
-  {{this.type}}: {{this.text}}{{/each}}
-
-  User Input: {{{transcribedText}}}
-
-  Your Response:`,
+    return {
+      text: `${agentInstructionsTemplate}\n\nConversation History:\n${conversationHistory}\n\nUser Input: ${input.transcribedText}\n\nYour Response:`,
+      custom: {},
+      metadata: {},
+    };
+  },
 });
 
 const aiAgentChatCompletionFlow = ai.defineFlow(

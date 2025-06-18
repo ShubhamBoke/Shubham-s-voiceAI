@@ -56,7 +56,8 @@ export async function textToSpeechResponseFlow(input: TextToSpeechResponseInput)
       },
       body: JSON.stringify({
         "text": input.text,
-        "voiceId": "en-US-natalie" // You can change the voiceId if needed
+        "voice_id":"en-IN-rohan",
+        "rate": 20
       }),
     });
 
