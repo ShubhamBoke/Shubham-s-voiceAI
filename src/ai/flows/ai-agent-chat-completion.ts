@@ -42,7 +42,7 @@ try {
   console.log('__dirname:', __dirname);
   console.log('process.cwd():', process.cwd());
   console.log('instructionsFilePath:', instructionsFilePath);
-  agentInstructionsTemplate = readFileSync(__dirname, 'utf-8');
+  agentInstructionsTemplate = readFileSync(path.join(process.cwd(), 'src/ai/flows/agent_instructions.txt'), 'utf-8');
 } catch (error) {
   console.error('Error reading agent instructions file:', error);
 }
