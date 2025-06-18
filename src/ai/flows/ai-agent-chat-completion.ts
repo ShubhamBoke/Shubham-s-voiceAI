@@ -35,10 +35,17 @@ export async function aiAgentChatCompletion(input: AiAgentChatCompletionInput): 
 
 // Define the path to the instructions file
 const instructionsFilePath = 'src/ai/flows/agent_instructions.txt';
-console.log(__dirname);
 
 // Read the instructions from the file
-const agentInstructionsTemplate = readFileSync(instructionsFilePath, 'utf-8');
+let agentInstructionsTemplate = '';
+try {
+  console.log('__dirname:', __dirname);
+  console.log('process.cwd():', process.cwd());
+  console.log('instructionsFilePath:', instructionsFilePath);
+  agentInstructionsTemplate = readFileSync(instructionsFilePath, 'utf-8');
+} catch (error) {
+  console.error('Error reading agent instructions file:', error);
+}
 
 const prompt = ai.definePrompt({
   name: 'aiAgentChatCompletionPrompt',
