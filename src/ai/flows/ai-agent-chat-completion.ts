@@ -42,7 +42,7 @@ try {
   console.log('__dirname:', __dirname);
   console.log('process.cwd():', process.cwd());
   console.log('instructionsFilePath:', instructionsFilePath);
-  agentInstructionsTemplate = readFileSync(instructionsFilePath, 'utf-8');
+  agentInstructionsTemplate = readFileSync(__dirname, 'utf-8');
 } catch (error) {
   console.error('Error reading agent instructions file:', error);
 }
