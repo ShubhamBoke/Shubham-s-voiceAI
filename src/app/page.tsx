@@ -102,7 +102,7 @@ export default function HomePage() {
         if (aiMessageId && ttsResult && ttsResult.audioDataUri) { // Check for aiMessageId and ttsResult with audioDataUri
            updateMessage(aiMessageId, { text: aiText, audioUrl: ttsResult.audioDataUri, autoPlay: true, status: 'completed' });
         }  else {
-           // Handle cases where TTS failed or didn\'t return audioDataUri
+           // Handle cases where TTS failed or didn't return audioDataUri
            console.error("TTS failed or did not return audio data.");
            // Update the AI message status to error
             if (aiMessageId) {
@@ -165,7 +165,7 @@ export default function HomePage() {
             <li><a href="#profile" className="hover:text-blue-400 transition-colors">Profile</a></li>
             <li><a href="#projects" className="hover:text-blue-400 transition-colors">Projects</a></li>
             <li><a href="#voice-assistant" className="hover:text-blue-400 transition-colors">Voice AI</a></li>
-            <li><a href="/path/to/your/resume.pdf" download className="hover:text-blue-400 transition-colors">Resume</a></li>
+            <li><a href="/Shubham_s_Resume.pdf" download="Shubham_s_Resume.pdf" type="application/pdf" className="hover:text-blue-400 transition-colors">Resume</a></li>
           </ul>
         </nav>
       </header>
@@ -176,7 +176,7 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-purple-500 shadow-lg">
               <img
-                src="/images/profile.jpg" // Replace with your profile image path
+                src="/Photo.jpg"
                 alt="Shubham"
                 className="object-cover w-full h-full"
               />
