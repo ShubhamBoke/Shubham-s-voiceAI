@@ -163,6 +163,8 @@ export default function HomePage() {
         <nav>
           <ul className="flex space-x-6">
             <li><a href="#profile" className="hover:text-blue-400 transition-colors">Profile</a></li>
+            <li><a href="#experience" className="hover:text-blue-400 transition-colors">Experience</a></li>
+            <li><a href="#qualification" className="hover:text-blue-400 transition-colors">Qualification</a></li>
             <li><a href="#projects" className="hover:text-blue-400 transition-colors">Projects</a></li>
             <li><a href="#voice-assistant" className="hover:text-blue-400 transition-colors">Voice AI</a></li>
             <li><a href="/Shubham_s_Resume.pdf" download="Shubham_s_Resume.pdf" type="application/pdf" className="hover:text-blue-400 transition-colors">Resume</a></li>
@@ -198,6 +200,34 @@ export default function HomePage() {
                 </Button>
               </div>
             </div>
+          </div>
+        </section>
+
+        <Separator className="my-20 bg-gray-700 animate-fade-in" />
+
+        {/* Experience Section */}
+        <section id="experience" className="my-20 animate-fade-in text-left justify-left">
+          <h2 className="text-4xl font-headline font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 mb-12">
+            Experience
+          </h2>
+          <div className="max-w-2xl mx-auto text-gray-400 leading-relaxed">
+            <p className="mb-4">
+              Software Engineer at <strong>RapidKen.ai</strong>: Gained industry experience in Web Development, Python Flask, Spring Framework, and Google Cloud Platform. Improved product performance and reduced operational costs by optimizing backend services and implementing efficient data handling, while ensuring reliability through comprehensive testing.
+            </p>
+          </div>
+        </section>
+
+        <Separator className="my-20 bg-gray-700 animate-fade-in" />
+
+        {/* Qualification Section */}
+        <section id="qualification" className="my-20 animate-fade-in text-left">
+          <h2 className="text-4xl font-headline font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 mb-12">
+            Qualification
+          </h2>
+          <div className="max-w-2xl mx-auto text-gray-400 leading-relaxed">
+            <p>
+              B.tech at College of Engineering Pune. Major in Computer Science Engineering.
+            </p>
           </div>
         </section>
 
@@ -246,9 +276,6 @@ export default function HomePage() {
               <CardContent>
                  <ChatInterface 
                    messages={messages}
-                   addMessage={addMessage}
-                   updateMessage={updateMessage}
-                   messageRefs={messageRefs}
                  />
               </CardContent>
             </Card>
