@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { FaLinkedin, FaGithub, FaEnvelope, FaWhatsapp } from 'react-icons/fa';
 
 interface Message {
   id: string;
@@ -19,8 +20,10 @@ interface Message {
   text: string;
   audioUrl?: string;
   status: 'processing' | 'completed' | 'error';
+
   autoPlay?: boolean;
 }
+
 
 interface ChatMessageRef {
   stopAudio: () => void;
@@ -41,12 +44,12 @@ export default function HomePage() {
   };
 
   // Add a new message and return its ID
- const addMessage = useCallback((message: Omit<Message, 'id'>) => {
+  const addMessage = useCallback((message: Omit<Message, 'id'>) => {
     const id = Date.now().toString(); // Simple unique ID
     const newMessage = { ...message, id };
     setMessages(prev => [...prev, newMessage]);
     return id;
- }, []);
+  }, []);
 
 
   const [isProcessing, setIsProcessing] = useState<boolean>(false); // General processing flag (transcription, AI, TTS)
@@ -135,24 +138,26 @@ export default function HomePage() {
 
   const projects = useMemo(() => [
     {
-      name: "Voice AI Assistant",
-      description: "An AI-powered voice assistant that transcribes audio, processes requests with an agent model, and responds with text-to-speech.",
-      technologies: ["Next.js", "React", "TypeScript", "GenKit", "Google AI Platform", "Tailwind CSS"],
-      link: "#voice-assistant", // Link to the chat interface section
-    },
-    {
-      name: "Project Beta",
-      description: "Description of Project Beta. Highlight key features and technologies.",
-      technologies: ["React", "Node.js", "MongoDB"],
+      name: "Beat",
+      shortDescription: "A rhythm-based 3D mobile game where you guide a glowing line through music-synced worlds.",
+      longDescription: `Beat is a visually immersive 3D rhythm game built with Next.js and Three.js. Players control a glowing line, weaving through dynamic tracks that pulse and shift to the beat of the music.\n\nKey Features:\n- Procedural level generation based on music tracks\n- AI-powered 3D asset creation and placement\n- Real-time visual effects and smooth controls\n- Backend with Node, Prisma, and PostgreSQL for user data and leaderboards`,
+      technologies: ["NextJS", "Three.js", "Node", "Prisma", "PostgreSQL"],
       link: "#",
     },
     {
-      name: "Project Gamma",
-      description: "Description of Project Gamma. Highlight key features and technologies.",
-      technologies: ["Vue.js", "Firebase"],
+      name: "Personalized AI Voice Chatbot",
+      shortDescription: "A conversational AI chatbot with natural voice, built using Google Gemini Genkit and Murf AI.",
+      longDescription: `This project is a smart voice-enabled chatbot web app. Users can chat naturally and receive instant, lifelike voice responses.\n\nHighlights:\n- Google Gemini Genkit for advanced conversational AI\n- Murf AI for expressive, human-like voice output\n- Modern Next.js frontend with seamless voice/text interaction`,
+      technologies: ["NextJS", "Google Gemini Genkit", "Murf AI"],
       link: "#",
     },
-    // Add more projects as needed
+    {
+      name: "Tiffin Service Management System",
+      shortDescription: "A full-stack PWA for automating tiffin bookings, subscriptions, and business management.",
+      longDescription: `A robust web app that streamlines daily tiffin operations for both customers and admins.\n\nFeatures:\n- Customers: Book/cancel tiffins, manage subscriptions, view menus, track deliveries, and access billing history\n- Admins: Manage orders, update menus, track users, respond to queries, and view business analytics\n- Secure REST APIs (Spring Boot, JWT), MySQL database, and PWA support for offline use`,
+      technologies: ["NextJS", "Spring Boot", "Spring Security", "JWT", "JPA Hibernate", "MySQL", "PWA"],
+      link: "#",
+    },
   ], []);
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-900 to-black text-gray-200">
@@ -192,12 +197,23 @@ export default function HomePage() {
                 A passionate Software Engineer with a focus on creating innovative solutions and exploring the exciting world of AI and voice interfaces. I build robust and scalable applications with a keen eye for user experience and modern technologies.
               </p>
               <div className="flex justify-center md:justify-start space-x-4">
-                <Button variant="outline" className="text-gray-200 border-gray-600 hover:bg-gray-800 hover:text-blue-400">
-                  <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                </Button>
-                <Button variant="outline" className="text-gray-200 border-gray-600 hover:bg-gray-800 hover:text-purple-400">
-                  <a href="https://github.com/yourprofile" target="_blank" rel="noopener noreferrer">GitHub</a>
-                </Button>
+                <a href="https://www.linkedin.com/in/shubham-boke" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                  <FaLinkedin size={40} color="#d1d5db" />
+                </a>
+                <a href="https://github.com/ShubhamBoke" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                  <FaGithub size={40} color="#d1d5db" />
+                </a>
+                <a href="mailto:shubhamboke.99@gmail.com" aria-label="Email">
+                  <FaEnvelope size={40} color="#d1d5db" />
+                </a>
+                <a
+                  href="https://wa.me/7218824832"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="WhatsApp"
+                >
+                  <FaWhatsapp size={40} color="#d1d5db" />
+                </a>
               </div>
             </div>
           </div>
@@ -206,13 +222,13 @@ export default function HomePage() {
         <Separator className="my-20 bg-gray-700 animate-fade-in" />
 
         {/* Experience Section */}
-        <section id="experience" className="my-20 animate-fade-in text-left justify-left">
-          <h2 className="text-4xl font-headline font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 mb-12">
-            Experience
-          </h2>
-          <div className="max-w-2xl mx-auto text-gray-400 leading-relaxed">
+        <section id="experience" className="my-20 animate-fade-in text-left justify-left ml-12">
+          <h2 className="text-4xl font-headline font-bold text-left text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 mb-12">Experience</h2>
+          <div className="max-w-2xl text-gray-400 leading-relaxed">
             <p className="mb-4">
-              Software Engineer at <strong>RapidKen.ai</strong>: Gained industry experience in Web Development, Python Flask, Spring Framework, and Google Cloud Platform. Improved product performance and reduced operational costs by optimizing backend services and implementing efficient data handling, while ensuring reliability through comprehensive testing.
+              <p className='text-xl text-white'>Software Engineer at <strong>RapidKen.AI</strong></p>
+
+              Gained industry experience in Web Development, Python Flask, Spring Framework, and Google Cloud Platform. Improved product performance and reduced operational costs by optimizing backend services and implementing efficient data handling, while ensuring reliability through comprehensive testing.
             </p>
           </div>
         </section>
@@ -220,13 +236,13 @@ export default function HomePage() {
         <Separator className="my-20 bg-gray-700 animate-fade-in" />
 
         {/* Qualification Section */}
-        <section id="qualification" className="my-20 animate-fade-in text-left">
-          <h2 className="text-4xl font-headline font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 mb-12">
+        <section id="qualification" className="my-20 animate-fade-in text-left ml-12">
+          <h2 className="text-4xl font-headline font-bold text-left text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 mb-12">
             Qualification
           </h2>
-          <div className="max-w-2xl mx-auto text-gray-400 leading-relaxed">
-            <p>
-              B.tech at College of Engineering Pune. Major in Computer Science Engineering.
+          <div className="max-w-2xl text-gray-400 leading-relaxed">
+            <p className='text-white'>
+              <strong>B.Tech</strong> at College of Engineering Pune. Major in <strong>Computer Science Engineering</strong>.
             </p>
           </div>
         </section>
@@ -238,30 +254,14 @@ export default function HomePage() {
           <h2 className="text-4xl font-headline font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 mb-12">
             My Projects
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 items-start">
             {projects.map((project, index) => (
-              <Card key={index} className="bg-gray-800 text-gray-200 border-gray-700 hover:border-blue-500 transition-colors duration-300">
-                <CardHeader>
-                  <CardTitle className="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">{project.name}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-400 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.map((tech, techIndex) => (
-                      <Badge key={techIndex} variant="secondary" className="bg-gray-700 text-gray-300 hover:bg-gray-600">{tech}</Badge>
-                    ))}
-                  </div>
-                  <Button variant="link" className="p-0 text-blue-400 hover:text-blue-300">
-                    <a href={project.link}>{project.link.startsWith("#") ? "View Section" : "View Project"} &rarr;</a>
-                  </Button>
-                </CardContent>
-              </Card>
+              <ProjectCard key={index} project={project} />
             ))}
           </div>
+
         </section>
-
         <Separator className="my-20 bg-gray-700 animate-fade-in" />
-
         {/* Voice Assistant Section */}
         <section id="voice-assistant" className="my-20 animate-fade-in">
           <h2 className="text-4xl font-headline font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 mb-12">
@@ -281,8 +281,7 @@ export default function HomePage() {
             </Card>
           </div>
         </section>
-  </main>
-
+      </main>
       <footer className="p-6 border-t border-gray-800 bg-black bg-opacity-50 shadow-lg sticky bottom-0 z-10 backdrop-blur-sm flex justify-center items-center">
         <AudioRecorder
           onRecordingComplete={handleAudioRecorded}
@@ -295,5 +294,39 @@ export default function HomePage() {
         </p>
       </footer>
     </div>
+  );
+}
+
+
+// Expandable Project Card Component
+function ProjectCard({ project }: { project: any }) {
+  const [expanded, setExpanded] = React.useState(false);
+  return (
+    <Card
+      className={`bg-gray-800 text-gray-200 border-gray-700 hover:border-blue-500 transition-colors duration-300 cursor-pointer ${expanded ? 'ring-2 ring-blue-400' : ''}`}
+      onClick={() => setExpanded((prev) => !prev)}
+    >
+      <CardHeader>
+        <CardTitle className="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">
+          {project.name}
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p className="text-gray-400 mb-2">
+          {project.shortDescription}
+        </p>
+        <div className="flex flex-wrap gap-2 mb-4">
+          {project.technologies.map((tech: string, techIndex: number) => (
+            <Badge key={techIndex} variant="secondary" className="bg-gray-700 text-gray-300 hover:bg-gray-600">{tech}</Badge>
+          ))}
+        </div>
+        <div
+          className={`transition-all duration-500 ease-in-out overflow-hidden ${expanded ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'} text-gray-300 whitespace-pre-line`}
+          style={{ willChange: 'max-height, opacity' }}
+        >
+          {project.longDescription}
+        </div>
+      </CardContent>
+    </Card>
   );
 }
